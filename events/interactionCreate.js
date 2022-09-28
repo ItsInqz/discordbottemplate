@@ -21,24 +21,6 @@ module.exports = {
 
                 if (!slashcmd) interaction.reply("Not a valid slash command");
                 await slashcmd.run({ client, interaction });
-            } else if (interaction.type === InteractionType.ModalSubmit) {
-                if (interaction.customId === "accountlist") {
-                    await interaction.deferReply()
-                    await interaction.deleteReply()
-                    const username = interaction.fields.getTextInputValue("username")
-                    const description = interaction.fields.getTextInputValue("description")
-                    const channelid = interaction.fields.getTextInputValue("channelid")
-                    const channel = client.channels.cache.get(channelid)
-                    
-                    const embed = new EmbedBuilder()
-                    .setTitle(`Account Listing: ${username}`)
-                    .setDescription(description)
-                    .setColor("#c577f2")
-                    .setFooter({text: `.gg/mcservices`})
-                    
-                    await channel.send({embeds: [embed]})
-                    return
-                }
             }
         }
         handleInteraction();
